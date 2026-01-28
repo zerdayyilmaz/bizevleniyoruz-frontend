@@ -3,9 +3,23 @@ import "./App.css";
 import logo from "./assets/logo.png";
 import rings from "./assets/rings.png";
 
+const withBase = (path) => {
+    const base = import.meta.env.BASE_URL;
+    if (path === "/") {
+        return base;
+    }
+    if (path.startsWith("/#")) {
+        return `${base}${path.slice(1)}`;
+    }
+    if (path.startsWith("#")) {
+        return `${base}${path}`;
+    }
+    return `${base}${path.replace(/^\//, "")}`;
+};
+
 const handleMenuToggle = (event) => {
     if (window.innerWidth <= 960) {
-        window.location.href = "/menu";
+        window.location.href = withBase("/menu");
         return;
     }
     const isOpen = document.body.classList.toggle("menu-open");
@@ -113,7 +127,7 @@ function NasilCalisirPage() {
         <div className="page page-static">
             <header className="topbar">
                 <div className="topbar-inner">
-                    <a className="logo" href="/" aria-label="BizEvleniyoruz ana sayfa">
+                    <a className="logo" href={withBase("/")} aria-label="BizEvleniyoruz ana sayfa">
                         <img src={logo} alt="BizEvleniyoruz" />
                         <span className="logo-text" aria-hidden="true">
                             {"BizEvleniyoruz".split("").map((char, index) => (
@@ -137,15 +151,15 @@ function NasilCalisirPage() {
                     </button>
 
                     <nav className="menu">
-                        <a className="menu-home" href="/">Ana Sayfa</a>
-                        <a href="/nasil-calisir" aria-current="page">Nasıl Çalışır</a>
-                        <a href="/#design-showcase">Tasarımlar</a>
-                        <a href="/fiyatlar">Fiyatlar</a>
-                        <a href="/iletisim">İletişim</a>
-                        <a className="menu-auth" href="/girisyap">Giriş Yap</a>
+                        <a className="menu-home" href={withBase("/")}>Ana Sayfa</a>
+                        <a href={withBase("/nasil-calisir")} aria-current="page">Nasıl Çalışır</a>
+                        <a href={withBase("/#design-showcase")}>Tasarımlar</a>
+                        <a href={withBase("/fiyatlar")}>Fiyatlar</a>
+                        <a href={withBase("/iletisim")}>İletişim</a>
+                        <a className="menu-auth" href={withBase("/girisyap")}>Giriş Yap</a>
                     </nav>
                     <div className="auth">
-                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = "/girisyap"; }}>
+                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = withBase("/girisyap"); }}>
                             Giriş Yap
                         </button>
                     </div>
@@ -217,7 +231,7 @@ function PricingPage() {
         <div className="page page-static">
             <header className="topbar">
                 <div className="topbar-inner">
-                    <a className="logo" href="/" aria-label="BizEvleniyoruz ana sayfa">
+                    <a className="logo" href={withBase("/")} aria-label="BizEvleniyoruz ana sayfa">
                         <img src={logo} alt="BizEvleniyoruz" />
                         <span className="logo-text" aria-hidden="true">
                             {"BizEvleniyoruz".split("").map((char, index) => (
@@ -241,15 +255,15 @@ function PricingPage() {
                     </button>
 
                     <nav className="menu">
-                        <a className="menu-home" href="/">Ana Sayfa</a>
-                        <a href="/nasil-calisir">Nasıl Çalışır</a>
-                        <a href="/#design-showcase">Tasarımlar</a>
-                        <a href="/fiyatlar" aria-current="page">Fiyatlar</a>
-                        <a href="/iletisim">İletişim</a>
-                        <a className="menu-auth" href="/girisyap">Giriş Yap</a>
+                        <a className="menu-home" href={withBase("/")}>Ana Sayfa</a>
+                        <a href={withBase("/nasil-calisir")}>Nasıl Çalışır</a>
+                        <a href={withBase("/#design-showcase")}>Tasarımlar</a>
+                        <a href={withBase("/fiyatlar")} aria-current="page">Fiyatlar</a>
+                        <a href={withBase("/iletisim")}>İletişim</a>
+                        <a className="menu-auth" href={withBase("/girisyap")}>Giriş Yap</a>
                     </nav>
                     <div className="auth">
-                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = "/girisyap"; }}>
+                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = withBase("/girisyap"); }}>
                             Giriş Yap
                         </button>
                     </div>
@@ -270,7 +284,7 @@ function ContactPage() {
         <div className="page page-static">
             <header className="topbar">
                 <div className="topbar-inner">
-                    <a className="logo" href="/" aria-label="BizEvleniyoruz ana sayfa">
+                    <a className="logo" href={withBase("/")} aria-label="BizEvleniyoruz ana sayfa">
                         <img src={logo} alt="BizEvleniyoruz" />
                         <span className="logo-text" aria-hidden="true">
                             {"BizEvleniyoruz".split("").map((char, index) => (
@@ -294,15 +308,15 @@ function ContactPage() {
                     </button>
 
                     <nav className="menu">
-                        <a className="menu-home" href="/">Ana Sayfa</a>
-                        <a href="/nasil-calisir">Nasıl Çalışır</a>
-                        <a href="/#design-showcase">Tasarımlar</a>
-                        <a href="/fiyatlar">Fiyatlar</a>
-                        <a href="/iletisim" aria-current="page">İletişim</a>
-                        <a className="menu-auth" href="/girisyap">Giriş Yap</a>
+                        <a className="menu-home" href={withBase("/")}>Ana Sayfa</a>
+                        <a href={withBase("/nasil-calisir")}>Nasıl Çalışır</a>
+                        <a href={withBase("/#design-showcase")}>Tasarımlar</a>
+                        <a href={withBase("/fiyatlar")}>Fiyatlar</a>
+                        <a href={withBase("/iletisim")} aria-current="page">İletişim</a>
+                        <a className="menu-auth" href={withBase("/girisyap")}>Giriş Yap</a>
                     </nav>
                     <div className="auth">
-                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = "/girisyap"; }}>
+                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = withBase("/girisyap"); }}>
                             Giriş Yap
                         </button>
                     </div>
@@ -358,7 +372,7 @@ function ReviewsPage() {
         <div className="page page-static">
             <header className="topbar">
                 <div className="topbar-inner">
-                    <a className="logo" href="/" aria-label="BizEvleniyoruz ana sayfa">
+                    <a className="logo" href={withBase("/")} aria-label="BizEvleniyoruz ana sayfa">
                         <img src={logo} alt="BizEvleniyoruz" />
                         <span className="logo-text" aria-hidden="true">
                             {"BizEvleniyoruz".split("").map((char, index) => (
@@ -382,15 +396,15 @@ function ReviewsPage() {
                     </button>
 
                     <nav className="menu">
-                        <a className="menu-home" href="/">Ana Sayfa</a>
-                        <a href="/nasil-calisir">Nasıl Çalışır</a>
-                        <a href="/#design-showcase">Tasarımlar</a>
-                        <a href="/fiyatlar">Fiyatlar</a>
-                        <a href="/iletisim">İletişim</a>
-                        <a className="menu-auth" href="/girisyap">Giriş Yap</a>
+                        <a className="menu-home" href={withBase("/")}>Ana Sayfa</a>
+                        <a href={withBase("/nasil-calisir")}>Nasıl Çalışır</a>
+                        <a href={withBase("/#design-showcase")}>Tasarımlar</a>
+                        <a href={withBase("/fiyatlar")}>Fiyatlar</a>
+                        <a href={withBase("/iletisim")}>İletişim</a>
+                        <a className="menu-auth" href={withBase("/girisyap")}>Giriş Yap</a>
                     </nav>
                     <div className="auth">
-                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = "/girisyap"; }}>
+                        <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = withBase("/girisyap"); }}>
                             Giriş Yap
                         </button>
                     </div>
@@ -413,7 +427,7 @@ function LoginPage() {
     return (
         <div className="page page-static">
             <div className="page-back">
-                <a className="back-btn" href="/">{"<"} GERİ</a>
+                <a className="back-btn" href={withBase("/")}>{"<"} GERİ</a>
             </div>
             <main className="login-page">
                 <section className="login-card">
@@ -429,7 +443,7 @@ function LoginPage() {
                             <input type="password" name="password" placeholder="••••••••" autoComplete="current-password" />
                         </label>
                         <div className="login-actions">
-                            <a className="login-link" href="/sifremi-unuttum">Şifremi unuttum</a>
+                            <a className="login-link" href={withBase("/sifremi-unuttum")}>Şifremi unuttum</a>
                             <button className="login-submit" type="button">Giriş Yap</button>
                         </div>
                     </form>
@@ -443,7 +457,7 @@ function ForgotPasswordPage() {
     return (
         <div className="page page-static">
             <div className="page-back">
-                <a className="back-btn" href="/girisyap">{"<"} GERİ</a>
+                <a className="back-btn" href={withBase("/girisyap")}>{"<"} GERİ</a>
             </div>
             <main className="login-page">
                 <section className="login-card">
@@ -455,7 +469,7 @@ function ForgotPasswordPage() {
                             <input type="email" name="email" placeholder="ornek@mail.com" autoComplete="email" />
                         </label>
                         <div className="login-actions">
-                            <a className="login-link" href="/girisyap">Girişe dön</a>
+                            <a className="login-link" href={withBase("/girisyap")}>Girişe dön</a>
                             <button className="login-submit" type="button">Bağlantı Gönder</button>
                         </div>
                     </form>
@@ -474,12 +488,12 @@ function MenuPage() {
                 </button>
             </div>
             <nav className="menu-page-nav">
-                <a href="/">Ana Sayfa</a>
-                <a href="/nasil-calisir">Nasıl Çalışır</a>
-                <a href="/#design-showcase">Tasarımlar</a>
-                <a href="/fiyatlar">Fiyatlar</a>
-                <a href="/iletisim">İletişim</a>
-                <a href="/girisyap">Giriş Yap</a>
+                <a href={withBase("/")}>Ana Sayfa</a>
+                <a href={withBase("/nasil-calisir")}>Nasıl Çalışır</a>
+                <a href={withBase("/#design-showcase")}>Tasarımlar</a>
+                <a href={withBase("/fiyatlar")}>Fiyatlar</a>
+                <a href={withBase("/iletisim")}>İletişim</a>
+                <a href={withBase("/girisyap")}>Giriş Yap</a>
             </nav>
         </div>
     );
@@ -487,7 +501,9 @@ function MenuPage() {
 
 function App() {
     const [openFaq, setOpenFaq] = useState(null);
-    const pathname = window.location.pathname;
+    const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+    const rawPath = window.location.pathname;
+    const pathname = base && rawPath.startsWith(base) ? rawPath.slice(base.length) || "/" : rawPath;
     const isNasilCalisir = pathname === "/nasil-calisir";
     const isFiyatlar = pathname === "/fiyatlar";
     const isIletisim = pathname === "/iletisim";
@@ -655,7 +671,7 @@ function App() {
     }, [isNasilCalisir, isFiyatlar, isIletisim, isYorumlar, isGirisYap, isSifremiUnuttum]);
 
     const handleCtaClick = () => {
-        window.location.href = "/fiyatlar";
+        window.location.href = withBase("/fiyatlar");
     };
 
     const faqs = [
@@ -729,7 +745,7 @@ function App() {
             <div className="page">
                 <header className="topbar">
                     <div className="topbar-inner">
-                        <a className="logo" href="/" aria-label="BizEvleniyoruz ana sayfa">
+                        <a className="logo" href={withBase("/")} aria-label="BizEvleniyoruz ana sayfa">
                             <img src={logo} alt="BizEvleniyoruz" />
                             <span className="logo-text" aria-hidden="true">
                                 {"BizEvleniyoruz".split("").map((char, index) => (
@@ -753,15 +769,15 @@ function App() {
                     </button>
 
                         <nav className="menu">
-                            <a className="menu-home" href="/">Ana Sayfa</a>
-                            <a href="/nasil-calisir">NASIL ÇALIŞIR</a>
-                            <a href="/#design-showcase">Tasarımlar</a>
-                            <a href="/fiyatlar">FİYATLAR</a>
-                            <a href="/iletisim">İLETİŞİM</a>
-                            <a className="menu-auth" href="/girisyap">GİRİŞ YAP</a>
+                            <a className="menu-home" href={withBase("/")}>Ana Sayfa</a>
+                            <a href={withBase("/nasil-calisir")}>NASIL ÇALIŞIR</a>
+                            <a href={withBase("/#design-showcase")}>Tasarımlar</a>
+                            <a href={withBase("/fiyatlar")}>FİYATLAR</a>
+                            <a href={withBase("/iletisim")}>İLETİŞİM</a>
+                            <a className="menu-auth" href={withBase("/girisyap")}>GİRİŞ YAP</a>
                         </nav>
                         <div className="auth">
-                            <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = "/girisyap"; }}>
+                            <button className="auth-btn ghost" type="button" onClick={() => { window.location.href = withBase("/girisyap"); }}>
                                 GİRİŞ YAP
                             </button>
                         </div>

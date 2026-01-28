@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var path = params.get("p");
+        if (!path) {
+          return;
+        }
+        var search = params.get("q") || "";
+        var hash = params.get("h") || "";
+        var base = "/bizevleniyoruz-frontend";
+        var decodedPath = decodeURIComponent(path);
+        var decodedSearch = decodeURIComponent(search);
+        var decodedHash = decodeURIComponent(hash);
+        var target =
+          base + (decodedPath === "/" ? "" : decodedPath) + decodedSearch + decodedHash;
+        window.history.replaceState(null, "", target);
+      })();
+    </script>
     <title>BizEvleniyoruz | Dijital Düğün Davetiyesi</title>
     <meta
       name="description"
